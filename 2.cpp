@@ -92,29 +92,28 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-LL T;
+LL N;
 
 int main() {
     fast
 
-    LL A[T];
-    LL B[T];
-    LL M[T];
-    GET(T);
-    REP(i, T) {
-        cin >> A[i] >> B[i] >> M[i];
+    cin >> N;
+
+    vl a;
+    REP(i, N) {
+        LL temp = 0;
+        cin >> temp;
+        a.pb(temp);
     }
 
-    LL Z[T];
-    SET(Z);
-    REP(i, T) {
-        REP(j, B[i]) {
-            Z[i] *= Z[i];
-        }
-        Z[i] %= M[i];
+
+    vl b = a;
+    SORT(b);
+
+    if (b == a) {
+        cout << 0;
+        return;
     }
 
-    REP(i, T) {
-        cout << Z[i] << endl;
-    }
+    LL
 }

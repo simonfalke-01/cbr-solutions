@@ -1,0 +1,1 @@
+{"name":"Local: fibo","url":"/Users/brandonli/Repositories/cbr-solutions/fibo.cpp","tests":[{"id":1677826658352,"input":"6","output":"0\n1\n1\n2\n3\n5\n8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/brandonli/Repositories/cbr-solutions/fibo.cpp","group":"local","local":true}

@@ -60,7 +60,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define SORTS(v) sort(ALL(v), sortbysec)
 #define REVERSE(v) reverse(ALL(v))
 #define ALLA(arr, sz) arr, arr+sz
-#define SIZEA(arr) sizeof(a)/sizeof(a[0]) 
+#define SIZEA(arr) sizeof(arr)/sizeof(arr[0]) 
 #define ALLS(arr) ALLA(arr, SIZEA(arr))
 #define SORTA(arr, sz) sort(ALLA(arr, sz))
 #define REVERSEA(arr, sz) reverse()
@@ -69,7 +69,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define sp <<' '<<
 #define endl '\n'
 #define GET(n) cin >> n
-#define GETN cin >> n
+#define GETN cin >> N
 #define NEXT(n, a) REP(i, n) cin >> a
 
 LL gcd(LL a, LL b ){
@@ -92,29 +92,21 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-LL T;
+LL N, A, B;
 
 int main() {
     fast
+    GETN;
+    GET(A);
+    GET(B);
 
-    LL A[T];
-    LL B[T];
-    LL M[T];
-    GET(T);
-    REP(i, T) {
-        cin >> A[i] >> B[i] >> M[i];
-    }
-
-    LL Z[T];
-    SET(Z);
-    REP(i, T) {
-        REP(j, B[i]) {
-            Z[i] *= Z[i];
-        }
-        Z[i] %= M[i];
-    }
-
-    REP(i, T) {
-        cout << Z[i] << endl;
+    FORN(i, 1, N) {
+        if (((i % A) == 0) && ((i % B) == 0)) {
+            cout << "FizzBuzz" << endl;
+        } else if ((i % A) == 0) {
+            cout << "Fizz" << endl;
+        } else if ((i % B) == 0) {
+            cout << "Buzz" << endl;
+        } else cout << i << endl;
     }
 }

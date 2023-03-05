@@ -60,7 +60,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define SORTS(v) sort(ALL(v), sortbysec)
 #define REVERSE(v) reverse(ALL(v))
 #define ALLA(arr, sz) arr, arr+sz
-#define SIZEA(arr) sizeof(a)/sizeof(a[0]) 
+#define SIZEA(arr) sizeof(arr)/sizeof(arr[0]) 
 #define ALLS(arr) ALLA(arr, SIZEA(arr))
 #define SORTA(arr, sz) sort(ALLA(arr, sz))
 #define REVERSEA(arr, sz) reverse()
@@ -92,29 +92,28 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-LL T;
+LL N;
+LL m;
+LL sum;
+LL sch;
 
 int main() {
     fast
 
-    LL A[T];
-    LL B[T];
-    LL M[T];
-    GET(T);
-    REP(i, T) {
-        cin >> A[i] >> B[i] >> M[i];
+    cin >> N >> m;
+    LL M[m];
+
+    REP(i, m) {
+        cin >> M[i];
     }
 
-    LL Z[T];
-    SET(Z);
-    REP(i, T) {
-        REP(j, B[i]) {
-            Z[i] *= Z[i];
-        }
-        Z[i] %= M[i];
+    SORTA(M, SIZEA(M));
+
+    REP(i, m) {
+        if (sum + M[i] > N) {
+            break;
+        } else sum += M[i]; ++sch;
     }
 
-    REP(i, T) {
-        cout << Z[i] << endl;
-    }
+    cout << sch;
 }
