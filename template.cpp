@@ -71,6 +71,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define GET(n) LL n; cin >> n
 #define GETN LL n; cin >> n;
 #define NEXT(n, a) REP(i, n) cin >> a[i]
+#define NEXTN(n, a, i) REP(i, n) cin >> a[i]
 #define print(x) cout << x << endl;
 #define printw(x) cout << x;
 
