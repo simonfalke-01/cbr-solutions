@@ -60,7 +60,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define SORTS(v) sort(ALL(v), sortbysec)
 #define REVERSE(v) reverse(ALL(v))
 #define ALLA(arr, sz) arr, arr+sz
-#define SIZEA(arr) sizeof(a)/sizeof(a[0]) 
+#define SIZEA(arr) sizeof(arr)/sizeof(arr[0]) 
 #define ALLS(arr) ALLA(arr, SIZEA(arr))
 #define SORTA(arr, sz) sort(ALLA(arr, sz))
 #define REVERSEA(arr, sz) reverse()
@@ -68,9 +68,11 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define TC(t) while (t--)
 #define sp <<' '<<
 #define endl '\n'
-#define GET(n) cin >> n
-#define GETN cin >> n
-#define NEXT(n, a) REP(i, n) cin >> a
+#define GET(n) LL n; cin >> n
+#define GETN LL n; cin >> n;
+#define NEXT(n, a) REP(i, n) cin >> a[i]
+#define print(x) cout << x << endl;
+#define printw(x) cout << x;
 
 LL gcd(LL a, LL b ){
     if (b == 0) return a;
@@ -92,28 +94,25 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-LL N;
 
 int main() {
-    fast
+    fast GETN;
 
-    cin >> N;
+    GET(k);
+    LL a[n];
+    NEXT(n, a);
 
-    vl a;
-    REP(i, N) {
-        LL temp = 0;
-        cin >> temp;
-        a.pb(temp);
+    LL l = 0;
+    REP(i, n) {
+        if (i <= n-k) {
+            LL t = 0;
+            REP(j, k) {
+                t += a[i+j];
+            }
+
+            if (t > l) l = t;
+        }
     }
 
-
-    vl b = a;
-    SORT(b);
-
-    if (b == a) {
-        cout << 0;
-        return;
-    }
-
-    LL
+    print(l);
 }

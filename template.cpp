@@ -68,9 +68,12 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define TC(t) while (t--)
 #define sp <<' '<<
 #define endl '\n'
-#define GET(n) cin >> n
-#define GETN cin >> N
-#define NEXT(n, a) REP(i, n) cin >> a
+#define GET(n) LL n; cin >> n
+#define GETN LL n; cin >> n;
+#define NEXT(n, a) REP(i, n) cin >> a[i]
+#define print(x) cout << x << endl;
+#define printw(x) cout << x;
+
 
 LL gcd(LL a, LL b ){
     if (b == 0) return a;
@@ -94,5 +97,6 @@ bool sortbysec(const pair<int,int> &a,
 
 
 int main() {
-    fast
+    fast GETN;
+
 }
