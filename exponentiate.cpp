@@ -2,6 +2,7 @@
 using namespace std;
 
 typedef long long LL;
+typedef long double LD;
 typedef unsigned long long ULL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
@@ -48,8 +49,10 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define MAX(a, b) a = max(a, b)
 #define MIN(a, b) a = min(a, b)
 #define SQR(x) ((LL)(x) * (x))
-#define RESET(a, b) memset(a, b, sizeof(a))
+#define RESET(a, b) fill(a, a + sizeof(a) / sizeof(a[0]), b)
+#define RESET2D(a, b) fill(&a[0][0], &a[0][0] + sizeof(a) / sizeof(a[0][0]), b)
 #define SET(a) RESET(a, 0)
+#define SET2D(a) RESET2D(a, 0)
 #define fi first
 #define se second
 #define mp make_pair
@@ -60,7 +63,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define SORTS(v) sort(ALL(v), sortbysec)
 #define REVERSE(v) reverse(ALL(v))
 #define ALLA(arr, sz) arr, arr+sz
-#define SIZEA(arr) sizeof(a)/sizeof(a[0]) 
+#define SIZEA(arr) sizeof(arr)/sizeof(arr[0])
 #define ALLS(arr) ALLA(arr, SIZEA(arr))
 #define SORTA(arr, sz) sort(ALLA(arr, sz))
 #define REVERSEA(arr, sz) reverse()
@@ -68,9 +71,13 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define TC(t) while (t--)
 #define sp <<' '<<
 #define endl '\n'
-#define GET(n) cin >> n
-#define GETN cin >> n
-#define NEXT(n, a) REP(i, n) cin >> a
+#define GET(n) LL n; cin >> n
+#define GETN LL n; cin >> n;
+#define NEXT(n, a) REP(i, n) cin >> a[i]
+#define NEXTN(n, a, i) REP(i, n) cin >> a[i]
+#define print(x) cout << x << endl;
+#define printw(x) cout << x;
+
 
 LL gcd(LL a, LL b ){
     if (b == 0) return a;
@@ -92,29 +99,26 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-LL T;
 
 int main() {
-    fast
+    fast GETN;
 
-    LL A[T];
-    LL B[T];
-    LL M[T];
-    GET(T);
-    REP(i, T) {
-        cin >> A[i] >> B[i] >> M[i];
-    }
+    REP(i, n) {
+        GET(a);
+        GET(b);
+        GET(m);
 
-    LL Z[T];
-    SET(Z);
-    REP(i, T) {
-        REP(j, B[i]) {
-            Z[i] *= Z[i];
+        LL prod {1};
+
+        // fast exponentiation
+        while (b > 0) {
+            if (b%2 == 1) {
+                prod = (prod * a) % m;
+            }
+            a = (a * a) % m;
+            b /= 2;
         }
-        Z[i] %= M[i];
-    }
 
-    REP(i, T) {
-        cout << Z[i] << endl;
+        print(prod);
     }
 }

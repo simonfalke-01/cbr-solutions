@@ -1,3 +1,7 @@
+//
+// Created by Brandon Li on 5/3/23.
+//
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -58,13 +62,12 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define mp make_pair
 #define pb push_back
 #define ALL(v) v.begin(), v.end()
-#define VINDEX(v, i) v.begin() + i
 #define SIZE(v) (int)v.size()
 #define SORT(v) sort(ALL(v))
 #define SORTS(v) sort(ALL(v), sortbysec)
 #define REVERSE(v) reverse(ALL(v))
 #define ALLA(arr, sz) arr, arr+sz
-#define SIZEA(arr) sizeof(arr)/sizeof(arr[0]) 
+#define SIZEA(arr) sizeof(arr)/sizeof(arr[0])
 #define ALLS(arr) ALLA(arr, SIZEA(arr))
 #define SORTA(arr, sz) sort(ALLA(arr, sz))
 #define REVERSEA(arr, sz) reverse()
@@ -73,7 +76,6 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define sp <<' '<<
 #define endl '\n'
 #define GET(n) LL n; cin >> n
-#define GETT(n, t) t n; cin >> n
 #define GETN LL n; cin >> n;
 #define NEXT(n, a) REP(i, n) cin >> a[i]
 #define NEXTN(n, a, i) REP(i, n) cin >> a[i]
@@ -105,4 +107,9 @@ bool sortbysec(const pair<int,int> &a,
 int main() {
     fast GETN;
 
+    if (prime(n) && n != 0) {
+        print("Prime");
+    } else {
+        print("Not Prime");
+    }
 }
