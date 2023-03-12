@@ -1,9 +1,6 @@
 //
-// Created by Brandon Li on 6/3/23.
+// Created by Brandon Li on 12/3/23.
 //
-
-// currently WA
-// https://codebreaker.xyz/submission/245769
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -46,7 +43,6 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #endif
 
 #define FOR(a, b, c) for (int(a) = (b); (a) < (c); ++(a))
-#define FORA(a, b, c) for (auto(a) = (b); (a) != (c); ++(a))
 #define FORN(a, b, c) for (int(a) = (b); (a) <= (c); ++(a))
 #define FORD(a, b, c) for (int(a) = (b); (a) >= (c); --(a))
 #define FORSQ(a, b, c) for (int(a) = (b); (a) * (a) <= (c); ++(a))
@@ -87,6 +83,9 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define NEXTN(n, a, i) REP(i, n) cin >> a[i]
 #define print(x) cout << x << endl;
 #define printw(x) cout << x;
+#define prints(x) cout << x << ' ';
+#define input [](){LL n; cin >> n; return n}
+#define inputt(t) [](){t n; cin >> n; return n;}()
 
 
 LL gcd(LL a, LL b ){
@@ -109,71 +108,35 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-void rebalance(priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-               priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    while (min_heap.size() > max_heap.size() + 1) {
-        max_heap.push(min_heap.top());
-        min_heap.pop();
-    }
-    while (max_heap.size() > min_heap.size() + 1) {
-        min_heap.push(max_heap.top());
-        max_heap.pop();
-    }
-}
+LL ans, i_right;
 
-void add_element(LL val,
-                 priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-                 priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    if (max_heap.empty() || val < max_heap.top()) {
-        max_heap.push(val);
+void find_intervals(vll a) {
+    SORT(a);
+
+    if (a[SIZE(a)-1].fi > i_right) {
+        ans++;
+        i_right = a[SIZE(a)-1].se;
     } else {
-        min_heap.push(val);
+        i_right = max(i_right, a[SIZE(a)-1].se);
     }
-
-    rebalance(min_heap, max_heap);
-}
-
-void remove_element(priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-                    priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    // if one heap is greater than the other by more than 1, remove the top
-    // else if both heaps are equal, remove from max_heap
-
-    if (max_heap.size() > min_heap.size() + 1) {
-        max_heap.pop();
-    } else if (min_heap.size() > max_heap.size() + 1) {
-        min_heap.pop();
-    } else {
-        max_heap.pop();
-    }
-
-    rebalance(min_heap, max_heap);
 }
 
 int main() {
     fast GETN;
 
-    priority_queue<LL, vl, greater<LL>> min_heap;
-    priority_queue<LL, vl, less<LL>> max_heap;
+    vll a;
 
     REP(i, n) {
-        GETT(x, string);
-        if (x == "PUSH") {
-            GET(num);
-            add_element(num, min_heap, max_heap);
-        } else if (x == "POP") {
-            remove_element(min_heap, max_heap);
+        GET(l);
+        GET(r);
+
+        a.pb(mp(l, r));
+
+        if (i == 0) {
+            i_right = a[0].se;
         }
-    }
 
-    while (!max_heap.empty()) {
-        printw(max_heap.top());
-        printw(" ");
-        max_heap.pop();
-    }
-
-    while (!min_heap.empty()) {
-        printw(min_heap.top());
-        printw(" ");
-        min_heap.pop();
+        find_intervals(a);
+        print(ans);
     }
 }

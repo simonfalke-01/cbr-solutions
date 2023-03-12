@@ -79,6 +79,9 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define NEXTN(n, a, i) REP(i, n) cin >> a[i]
 #define print(x) cout << x << endl;
 #define printw(x) cout << x;
+#define prints(x) cout << x << ' ';
+#define input [](){LL n; cin >> n; return n}
+#define inputt(t) [](){t n; cin >> n; return n;}()
 
 
 LL gcd(LL a, LL b ){
@@ -104,5 +107,6 @@ bool sortbysec(const pair<int,int> &a,
 
 int main() {
     fast GETN;
+
 
 }

@@ -1,9 +1,6 @@
 //
-// Created by Brandon Li on 6/3/23.
+// Created by Brandon Li on 7/3/23.
 //
-
-// currently WA
-// https://codebreaker.xyz/submission/245769
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -46,7 +43,6 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #endif
 
 #define FOR(a, b, c) for (int(a) = (b); (a) < (c); ++(a))
-#define FORA(a, b, c) for (auto(a) = (b); (a) != (c); ++(a))
 #define FORN(a, b, c) for (int(a) = (b); (a) <= (c); ++(a))
 #define FORD(a, b, c) for (int(a) = (b); (a) >= (c); --(a))
 #define FORSQ(a, b, c) for (int(a) = (b); (a) * (a) <= (c); ++(a))
@@ -87,6 +83,7 @@ int diry[8] = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define NEXTN(n, a, i) REP(i, n) cin >> a[i]
 #define print(x) cout << x << endl;
 #define printw(x) cout << x;
+#define prints(x) cout << x << ' ';
 
 
 LL gcd(LL a, LL b ){
@@ -109,71 +106,34 @@ bool sortbysec(const pair<int,int> &a,
     return (a.second < b.second);
 }
 
-void rebalance(priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-               priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    while (min_heap.size() > max_heap.size() + 1) {
-        max_heap.push(min_heap.top());
-        min_heap.pop();
-    }
-    while (max_heap.size() > min_heap.size() + 1) {
-        min_heap.push(max_heap.top());
-        max_heap.pop();
-    }
-}
-
-void add_element(LL val,
-                 priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-                 priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    if (max_heap.empty() || val < max_heap.top()) {
-        max_heap.push(val);
+void push_bricks(LL h, stack<LL> &s) {
+    if (s.empty()) {
+        s.push(h);
+        return;
     } else {
-        min_heap.push(val);
+        if (h >= s.top()) {
+            s.pop();
+            push_bricks(h, s);
+        } else {
+            s.push(h);
+            return;
+        }
     }
-
-    rebalance(min_heap, max_heap);
-}
-
-void remove_element(priority_queue<LL, vector<LL>, greater<LL>>& min_heap,
-                    priority_queue<LL, vector<LL>, less<LL>>& max_heap) {
-    // if one heap is greater than the other by more than 1, remove the top
-    // else if both heaps are equal, remove from max_heap
-
-    if (max_heap.size() > min_heap.size() + 1) {
-        max_heap.pop();
-    } else if (min_heap.size() > max_heap.size() + 1) {
-        min_heap.pop();
-    } else {
-        max_heap.pop();
-    }
-
-    rebalance(min_heap, max_heap);
 }
 
 int main() {
     fast GETN;
 
-    priority_queue<LL, vl, greater<LL>> min_heap;
-    priority_queue<LL, vl, less<LL>> max_heap;
+    LL a[n];
+    NEXT(n, a);
 
+    stack<LL> s;
     REP(i, n) {
-        GETT(x, string);
-        if (x == "PUSH") {
-            GET(num);
-            add_element(num, min_heap, max_heap);
-        } else if (x == "POP") {
-            remove_element(min_heap, max_heap);
-        }
+        push_bricks(a[i], s);
     }
 
-    while (!max_heap.empty()) {
-        printw(max_heap.top());
-        printw(" ");
-        max_heap.pop();
-    }
-
-    while (!min_heap.empty()) {
-        printw(min_heap.top());
-        printw(" ");
-        min_heap.pop();
+    while(!s.empty()) {
+        print(s.top());
+        s.pop();
     }
 }
